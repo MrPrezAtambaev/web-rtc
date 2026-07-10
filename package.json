@@ -1,0 +1,16 @@
+{
+  "name": "web-rtc-demo",
+  "version": "1.0.0",
+  "description": "Browser-to-browser WebRTC video call demo with a WebSocket signaling server",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^25.3.0"
+  }
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WebRTC Demo — общее полотно</title>
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <header>
+      <h1>WebRTC: общее полотно</h1>
+      <p class="hint">До 8 участников: откройте страницу на нескольких устройствах и введите одинаковый ID комнаты. Все камеры и экраны — плитки на общем полотне: двигайте, меняйте размер за правый нижний угол, слои — кнопками ▲/▼, «на всё полотно» — ⛶. Раскладка общая — её видят и меняют все.</p>
+    </header>
+
+    <section class="join-panel" id="joinPanel">
+      <input id="roomInput" type="text" placeholder="ID комнаты, например: demo" maxlength="64" autocomplete="off" />
+      <button id="joinBtn" class="primary">Войти</button>
+    </section>
+
+    <section hidden id="stageSection">
+      <div class="stage-row">
+        <div id="stage"></div>
+        <aside class="sidebar">
+          <h2>На полотне</h2>
+          <ul id="tileList"></ul>
+          <p class="sidebar-hint">Клик по строке — плитка вперёд</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="controls" hidden id="controlsSection">
+      <button id="micBtn" title="Микрофон">🎤 Микрофон</button>
+      <button id="camBtn" title="Камера">📷 Камера</button>
+      <button id="screenBtn" title="Демонстрация экрана">🖥 Экран</button>
+      <button id="stageFsBtn" title="Полотно во весь экран">⛶ Во весь экран</button>
+      <button id="hangupBtn" class="danger" title="Завершить">📴 Завершить</button>
+    </section>
+
+    <p class="status" id="status">Не подключено</p>
+  </main>
+
+  <script src="main.js"></script>
+</body>
+</html>

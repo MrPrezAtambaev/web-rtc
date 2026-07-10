@@ -1,0 +1,300 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #0f1117;
+  color: #e6e8ee;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+}
+
+.app {
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+header h1 {
+  font-size: 1.5rem;
+  margin-bottom: 6px;
+}
+
+.hint {
+  color: #9aa1b2;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.join-panel {
+  display: flex;
+  gap: 10px;
+}
+
+input {
+  flex: 1;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #2a2f3d;
+  background: #181b24;
+  color: inherit;
+  font-size: 1rem;
+  outline: none;
+}
+
+input:focus {
+  border-color: #4f7cff;
+}
+
+button {
+  padding: 12px 18px;
+  border-radius: 10px;
+  border: 1px solid #2a2f3d;
+  background: #181b24;
+  color: inherit;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+button:hover {
+  background: #222635;
+}
+
+button.primary {
+  background: #4f7cff;
+  border-color: #4f7cff;
+  font-weight: 600;
+}
+
+button.primary:hover {
+  background: #3d68e8;
+}
+
+button.danger {
+  background: #e5484d;
+  border-color: #e5484d;
+  font-weight: 600;
+}
+
+button.danger:hover {
+  background: #cc3b40;
+}
+
+button.off {
+  background: #3a2327;
+  border-color: #e5484d;
+  color: #ff8a8e;
+}
+
+/* --- Shared stage --- */
+
+.stage-row {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: #181b24;
+  border: 1px solid #2a2f3d;
+  border-radius: 14px;
+  padding: 14px;
+}
+
+.sidebar h2 {
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+  color: #e6e8ee;
+}
+
+.sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar li {
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.sidebar li:hover {
+  background: #222635;
+}
+
+.sidebar li.empty {
+  color: #9aa1b2;
+  cursor: default;
+}
+
+.sidebar li.empty:hover {
+  background: none;
+}
+
+.sidebar-hint {
+  margin-top: 10px;
+  color: #9aa1b2;
+  font-size: 0.75rem;
+}
+
+@media (max-width: 760px) {
+  .stage-row {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+  }
+}
+
+#stage {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  flex: 1;
+  aspect-ratio: 16 / 9;
+  background: #05060a;
+  border: 1px solid #2a2f3d;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+#stage:empty::after {
+  content: 'Полотно пустое — плитки появятся после входа участников';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9aa1b2;
+  font-size: 0.95rem;
+}
+
+#stage:fullscreen {
+  aspect-ratio: auto;
+  border: none;
+  border-radius: 0;
+}
+
+.tile {
+  position: absolute;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: move;
+}
+
+.tile video {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #000;
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+.tile.max {
+  left: 0 !important;
+  top: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  cursor: default;
+}
+
+.tile.max video {
+  height: 100%;
+  object-fit: contain;
+  border-radius: 0;
+}
+
+.tile-label {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  padding: 3px 9px;
+  border-radius: 7px;
+  background: rgba(0, 0, 0, 0.55);
+  font-size: 0.75rem;
+  pointer-events: none;
+}
+
+.tile-toolbar {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.tile:hover .tile-toolbar {
+  opacity: 1;
+}
+
+.tile-toolbar button {
+  padding: 3px 9px;
+  font-size: 0.8rem;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+}
+
+.tile-toolbar button:hover {
+  background: rgba(40, 46, 60, 0.9);
+}
+
+.tile-handle {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 20px;
+  height: 20px;
+  cursor: nwse-resize;
+}
+
+.tile.max .tile-handle {
+  display: none;
+}
+
+.tile-handle::after {
+  content: '';
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  width: 9px;
+  height: 9px;
+  border-right: 2px solid rgba(255, 255, 255, 0.75);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.75);
+  border-radius: 2px;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.status {
+  text-align: center;
+  color: #9aa1b2;
+  font-size: 0.85rem;
+}
